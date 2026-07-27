@@ -1,0 +1,29 @@
+<div class="container-form">
+    <h2>Bitácora de accesos</h2>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Sistema operativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of registros()">
+                <td>{{ reg.nombreUsuarios }}</td>
+                <td>{{ reg.fechaHoraBitacora | date:'dd-MMM-yyyy HH:mm' }}</td>
+                <td>{{ reg.soBitacora }}</td>
+            </tr>
+            <tr *ngIf="registros().length === 0">
+                <td colspan="3" style="text-align:center; color: var(--color-text-soft);">
+                    No hay registros disponibles.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="button-group-right">
+        <button class="btn-cyan" routerLink="/dashboard">Regresar</button>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="wireframe-container">
+    <header class="header-box">
+        <div class="logo-group">
+            <div class="img-placeholder">FW</div>
+            <h1>Frameworks</h1>
+        </div>
+        <div class="admin-nav" *ngIf="esAdmin">
+            <a routerLink="/admin/nuevo-usuario">Nuevo usuario</a>
+            <a routerLink="/admin/bitacora">Bitácora</a>
+        </div>
+    </header>
+
+    <div class="content-grid">
+        <div class="datos-section">
+            <div class="section-header">Datos</div>
+            <div class="datos-list-box">
+                <ul>
+                    <li *ngFor="let dato of datos()" (click)="seleccionar(dato.idDatos)"
+                        [class.active]="selectedId === dato.idDatos">
+                        {{ dato.nombreDatos }}
+                    </li>
+                    <li *ngIf="datos().length === 0" class="empty-item">
+                        No hay registros disponibles.
+                    </li>
+                </ul>
+            </div>
+            <div class="user-footer">
+                <span>Usuario <strong>{{ nombreUsuario }}</strong></span>
+                <button class="logout-link" (click)="cerrarSesion()">Salir</button>
+            </div>
+        </div>
+
+        <div class="buttons-section">
+            <button class="action-btn" [class.btn-cyan]="puedeNuevo" [class.btn-grey]="!puedeNuevo"
+                [disabled]="!puedeNuevo" routerLink="/datos/nuevo">
+                Nuevo
+            </button>
+
+            <button class="action-btn" [class.btn-cyan]="selectedId && puedeDesplegar"
+                [class.btn-grey]="!selectedId || !puedeDesplegar" [disabled]="!selectedId || !puedeDesplegar"
+                [routerLink]="['/datos/desplegar', selectedId]">
+                Desplegar
+            </button>
+
+            <button class="action-btn" [class.btn-cyan]="selectedId && puedeEditar"
+                [class.btn-grey]="!selectedId || !puedeEditar" [disabled]="!selectedId || !puedeEditar"
+                [routerLink]="['/datos/editar', selectedId]">
+                Editar
+            </button>
+
+            <button class="action-btn" [class.btn-cyan]="selectedId && puedeEliminar"
+                [class.btn-grey]="!selectedId || !puedeEliminar" [disabled]="!selectedId || !puedeEliminar"
+                (click)="eliminar()">
+                Eliminar
+            </button>
+        </div>
+    </div>
+</div>

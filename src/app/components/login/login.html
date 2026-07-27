@@ -1,0 +1,49 @@
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-card__header">
+            {{ isRegistering() ? 'Crear cuenta' : 'Iniciar sesión' }}
+        </div>
+
+        <div class="auth-card__body">
+            <div *ngIf="!isRegistering()">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" [(ngModel)]="usuarioInput" placeholder="Nombre de usuario">
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" [(ngModel)]="claveInput" placeholder="••••••••">
+                </div>
+
+                <p *ngIf="error()" class="error-message">{{ error() }}</p>
+
+                <button class="btn-cyan" (click)="ingresar()">Entrar</button>
+
+                <div class="auth-card__footer">
+                    <a (click)="toggleRegister()">¿No tienes cuenta? Crear una</a>
+                </div>
+            </div>
+
+            <div *ngIf="isRegistering()">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" [(ngModel)]="regUsuario" placeholder="Nombre de usuario">
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" [(ngModel)]="regClave" placeholder="••••••••">
+                </div>
+
+                <p *ngIf="error()" class="error-message">{{ error() }}</p>
+
+                <button class="btn-cyan" (click)="registrar()">Registrar</button>
+
+                <div class="auth-card__footer">
+                    <a (click)="toggleRegister()">Volver al inicio de sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
